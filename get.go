@@ -11,7 +11,7 @@ func Get(key string) string {
 		once sync.Once
 	)
 
-	if !loaded {
+	if !IsLoaded {
 		if err := Load(); err != nil {
 			once.Do(func() {
 				log.Print("[warning] there is no .env file to load")
