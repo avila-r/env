@@ -8,11 +8,12 @@ import (
 )
 
 var (
-	loaded bool
+	IsLoaded         bool
+	HasCustomProfile bool
 )
 
 func Load(path ...string) error {
-	if loaded {
+	if IsLoaded {
 		return nil
 	}
 
@@ -36,6 +37,8 @@ func Load(path ...string) error {
 
 	// No custom profile to load
 	if profile == "" {
+		IsLoaded, HasCustomProfile = true, false
+
 		return nil
 	}
 
@@ -45,7 +48,7 @@ func Load(path ...string) error {
 		return err
 	}
 
-	loaded = true
+	IsLoaded, HasCustomProfile = true, true
 
 	return nil
 }
